@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+			<style>
+
+	.button {
+  background-color: #0000FF;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+body  
+{  
+    margin: 0;  
+    padding: 0;  
+    background-color:#6abadeba;  
+    font-family: 'Arial';  
+}  
+.login{  
+        width: 382px;  
+        overflow: hidden;  
+        margin: auto;  
+        margin: 20 0 0 450px;  
+        padding: 80px;  
+        background: #23463f;  
+        border-radius: 15px ;  
+          
+}  
+h2{  
+    text-align: center;  
+    color: #277582;  
+    padding: 20px;  
+}  
+label{  
+    color: #08ffd1;  
+    font-size: 17px;  
+}  
+#Uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+}  
+#Pass{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
+      
+}  
+#log{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 17px;  
+    padding-left: 7px;  
+    color: blue;  
+  
+  
+}  
+span{  
+    color: white;  
+    font-size: 17px;  
+}  
+a{  
+    float: right;  
+    background-color: grey;  
+}  
+	</style> 
+	</head>
+
+
+<body>  
+
+
+	
+
+
+  <h1 align="center">Registration</h1><br> 
+
+    <div class="login">    
+
+	<form id="reg-form">
+	
+<table>  
+<tr><td><label><b>First Name</b></label></td><td><label><b>Last Name</b></label></td></tr>  
+<tr><td><input type="text" autocomplete="off" id="firstname" placeholder="Enter First name" required/></td><td><input type="text" autocomplete="off" id="lastname" placeholder="Enter last name" required/></td></tr>  
+<tr><td><label><b>Email</b></label></td><td><label><b>Password</b></label></td></tr>  
+<tr><td><input type="email" autocomplete="off" id="username" placeholder="Username" required/></td><td><input type="password" autocomplete="off" id="password" placeholder="Password" required/></td></tr> 
+<tr><td><label><b>Mobile No.</b></label></td><td><label><b>Address</b></label></td></tr>  
+<tr><td><input type="number" autocomplete="off" id="mobileno" placeholder="Enter mobileno" required/></td><td><textarea id="address" autocomplete="off" placeholder="Enter Address" required></textarea></td></tr>  
+
+</table><br>  <input type="submit" class="button" value="Submit Form" />
+  	  <a href="index.html" style="color:blue;background-color:#23463f;align:right">Back</a>   
+
+		</form>
+		<script>
+			const form = document.getElementById('reg-form')
+			form.addEventListener('submit', registerUser)
+
+			async function registerUser(event) {
+				event.preventDefault()
+				const username = document.getElementById('username').value
+				const password = document.getElementById('password').value
+				const firstname=document.getElementById('firstname').value
+				const lastname=document.getElementById('lastname').value
+				const mobileno=document.getElementById('mobileno').value
+				const address=document.getElementById('address').value
+
+				const result = await fetch('/api/register', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						username,
+						password,
+						firstname,
+						lastname,
+						mobileno,
+						address
+					})
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					alert('Success')
+				 //result.redirect('/index.html');
+				   window.location.href = "index.html";
+
+				} else {
+					alert(result.error)
+				}
+			}
+		</script>
+</div>    
+</body>    
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
